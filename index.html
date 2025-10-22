@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="经典贪吃蛇游戏,完全基于浏览器运行">
+    <title>贪吃蛇游戏</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/themes.css">
+</head>
+<body>
+    <!-- 欢迎屏幕 -->
+    <div id="welcomeScreen" class="screen active">
+        <div class="logo-container">
+            <h1 class="game-logo">贪吃蛇</h1>
+            <div class="snake-animation"></div>
+            <p class="slogan">经典重现,即开即玩!</p>
+            <button class="start-btn" onclick="ui.showMainMenu()">点击开始</button>
+        </div>
+    </div>
+
+    <!-- 主菜单 -->
+    <div id="mainMenu" class="screen">
+        <div class="menu-container">
+            <h1 class="game-title">贪吃蛇</h1>
+            <div class="high-score-display">
+                <span class="label">最高分:</span>
+                <span class="score" id="mainMenuHighScore">0</span>
+            </div>
+
+            <div class="difficulty-selector">
+                <label>难度:</label>
+                <div class="difficulty-buttons">
+                    <button class="difficulty-btn" data-difficulty="easy">简单</button>
+                    <button class="difficulty-btn active" data-difficulty="medium">中等</button>
+                    <button class="difficulty-btn" data-difficulty="hard">困难</button>
+                </div>
+            </div>
+
+            <button class="primary-btn" onclick="ui.startGame()">开始游戏</button>
+
+            <div class="menu-buttons">
+                <button class="secondary-btn" onclick="ui.showSettings()">设置</button>
+                <button class="secondary-btn" onclick="ui.showStats()">统计</button>
+                <button class="secondary-btn" onclick="ui.showHelp()">帮助</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 游戏界面 -->
+    <div id="gameScreen" class="screen">
+        <div class="game-container">
+            <div class="game-header">
+                <div class="info-item">
+                    <span class="label">分数:</span>
+                    <span class="value" id="currentScore">0</span>
+                </div>
+                <div class="info-item">
+                    <span class="label">最高:</span>
+                    <span class="value" id="highScore">0</span>
+                </div>
+                <div class="info-item">
+                    <span class="label">时间:</span>
+                    <span class="value" id="gameTime">0:00</span>
+                </div>
+            </div>
+
+            <div class="game-area">
+                <canvas id="gameCanvas"></canvas>
+                <div id="countdown" class="countdown"></div>
+            </div>
+
+            <div class="game-controls">
+                <button class="control-btn" id="pauseBtn" onclick="game.togglePause()">暂停</button>
+                <button class="control-btn" onclick="game.restart()">重新开始</button>
+                <button class="control-btn" onclick="ui.showSettings()">设置</button>
+                <button class="control-btn" onclick="ui.exitToMenu()">退出</button>
+            </div>
+
+            <!-- 移动端虚拟方向键 -->
+            <div class="virtual-controls" id="virtualControls">
+                <div class="dpad">
+                    <button class="dpad-btn up" data-direction="up">↑</button>
+                    <button class="dpad-btn left" data-direction="left">←</button>
+                    <button class="dpad-btn right" data-direction="right">→</button>
+                    <button class="dpad-btn down" data-direction="down">↓</button>
+                </div>
+            </div>
+
+            <div class="control-hint">
+                方向键/WASD控制 | 空格暂停
+            </div>
+        </div>
+    </div>
+
+    <!-- 游戏结束弹窗 -->
+    <div id="gameOverModal" class="modal">
+        <div class="modal-content">
+            <h2 class="modal-title">游戏结束</h2>
+            <div class="final-score-container">
+                <p class="final-score-label">本次得分</p>
+                <p class="final-score" id="finalScore">0</p>
+                <p class="score-message" id="scoreMessage">再接再厉!</p>
+            </div>
+            <div class="modal-buttons">
+                <button class="primary-btn" onclick="game.restart()">再来一局</button>
+                <button class="secondary-btn" onclick="ui.showStats()">查看统计</button>
+                <button class="secondary-btn" onclick="ui.exitToMenu()">返回主菜单</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 设置界面 -->
+    <div id="settingsScreen" class="screen">
+        <div class="settings-container">
+            <h2 class="screen-title">设置</h2>
+
+            <div class="settings-grid">
+                <div class="setting-item">
+                    <label>游戏难度</label>
+                    <div class="difficulty-buttons">
+                        <button class="difficulty-btn" data-setting-difficulty="easy">简单</button>
+                        <button class="difficulty-btn active" data-setting-difficulty="medium">中等</button>
+                        <button class="difficulty-btn" data-setting-difficulty="hard">困难</button>
+                    </div>
+                </div>
+
+                <div class="setting-item">
+                    <label>音效</label>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="soundToggle" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+
+                <div class="setting-item">
+                    <label>背景音乐</label>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="musicToggle" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+
+                <div class="setting-item">
+                    <label>显示网格线</label>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="gridToggle" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+
+                <div class="setting-item full-width">
+                    <label>游戏主题</label>
+                    <div class="theme-buttons">
+                        <button class="theme-btn active" data-theme="classic">
+                            <span class="theme-preview classic-preview"></span>
+                            经典绿
+                        </button>
+                        <button class="theme-btn" data-theme="dark">
+                            <span class="theme-preview dark-preview"></span>
+                            暗黑
+                        </button>
+                        <button class="theme-btn" data-theme="rainbow">
+                            <span class="theme-preview rainbow-preview"></span>
+                            彩虹
+                        </button>
+                    </div>
+                </div>
+
+                <div class="setting-item full-width">
+                    <button class="danger-btn" onclick="storage.resetData()">重置所有数据</button>
+                </div>
+            </div>
+
+            <button class="back-btn" onclick="ui.goBack()">返回</button>
+        </div>
+    </div>
+
+    <!-- 统计界面 -->
+    <div id="statsScreen" class="screen">
+        <div class="stats-container">
+            <h2 class="screen-title">统计数据</h2>
+
+            <div class="stats-cards">
+                <div class="stat-card">
+                    <div class="stat-icon">🎮</div>
+                    <div class="stat-value" id="totalGames">0</div>
+                    <div class="stat-label">总游戏次数</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🏆</div>
+                    <div class="stat-value" id="statsHighScore">0</div>
+                    <div class="stat-label">历史最高分</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">📊</div>
+                    <div class="stat-value" id="avgScore">0</div>
+                    <div class="stat-label">平均分数</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">⏱️</div>
+                    <div class="stat-value" id="totalTime">0:00</div>
+                    <div class="stat-label">总游戏时长</div>
+                </div>
+            </div>
+
+            <div class="history-section">
+                <h3>最近游戏记录</h3>
+                <div class="history-table-container">
+                    <table class="history-table" id="historyTable">
+                        <thead>
+                            <tr>
+                                <th>日期</th>
+                                <th>分数</th>
+                                <th>时长</th>
+                                <th>难度</th>
+                            </tr>
+                        </thead>
+                        <tbody id="historyTableBody">
+                            <tr>
+                                <td colspan="4" class="no-data">暂无记录</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <button class="back-btn" onclick="ui.goBack()">返回</button>
+        </div>
+    </div>
+
+    <!-- 帮助界面 -->
+    <div id="helpScreen" class="screen">
+        <div class="help-container">
+            <h2 class="screen-title">游戏帮助</h2>
+
+            <div class="help-section">
+                <h3>🎯 游戏规则</h3>
+                <p>控制贪吃蛇移动,吃到食物会增长身体并获得分数。碰到墙壁或自己的身体则游戏结束。</p>
+            </div>
+
+            <div class="help-section">
+                <h3>🎮 操作指南</h3>
+                <div class="controls-guide">
+                    <div class="control-row">
+                        <span class="key">↑ ↓ ← →</span>
+                        <span>方向键控制移动</span>
+                    </div>
+                    <div class="control-row">
+                        <span class="key">W A S D</span>
+                        <span>WASD键控制移动</span>
+                    </div>
+                    <div class="control-row">
+                        <span class="key">空格</span>
+                        <span>暂停/继续游戏</span>
+                    </div>
+                    <div class="control-row">
+                        <span class="key">触摸</span>
+                        <span>滑动屏幕改变方向(移动端)</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="help-section">
+                <h3>📈 计分规则</h3>
+                <ul>
+                    <li>普通食物: +10分</li>
+                    <li>每吃一个食物,蛇身增长一节</li>
+                    <li>难度越高,基础分数越高</li>
+                </ul>
+            </div>
+
+            <div class="help-section">
+                <h3>💡 小技巧</h3>
+                <ul>
+                    <li>尽量保持在中心区域活动,避免被困在角落</li>
+                    <li>提前规划路线,不要盲目追逐食物</li>
+                    <li>蛇身越长,移动空间越小,需要更谨慎</li>
+                </ul>
+            </div>
+
+            <div class="help-section">
+                <h3>ℹ️ 关于</h3>
+                <p>版本: 1.0.0</p>
+                <p>纯前端贪吃蛇游戏,所有数据保存在本地浏览器中。</p>
+            </div>
+
+            <button class="back-btn" onclick="ui.goBack()">返回</button>
+        </div>
+    </div>
+
+    <!-- JavaScript文件 -->
+    <script src="js/storage.js"></script>
+    <script src="js/audio.js"></script>
+    <script src="js/render.js"></script>
+    <script src="js/game.js"></script>
+    <script src="js/ui.js"></script>
+</body>
+</html>

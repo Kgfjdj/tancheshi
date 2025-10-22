@@ -1,0 +1,300 @@
+/* 主题样式 */
+
+/* 经典绿主题(默认) */
+body.theme-classic,
+body {
+    --primary-color: #00D084;
+    --primary-dark: #00A66E;
+    --bg-color: #1A1A2E;
+    --bg-secondary: #16213E;
+    --snake-color: #00D084;
+    --snake-head: #00FF9C;
+    --food-color: #FF6B6B;
+    --text-color: #FFFFFF;
+    --text-secondary: rgba(255, 255, 255, 0.7);
+}
+
+body.theme-classic {
+    background: #1A1A2E;
+}
+
+body.theme-classic #welcomeScreen {
+    background: linear-gradient(135deg, #1A1A2E 0%, #16213E 100%);
+}
+
+body.theme-classic .game-logo {
+    text-shadow: 0 0 20px rgba(0, 208, 132, 0.5);
+}
+
+body.theme-classic .primary-btn,
+body.theme-classic .start-btn {
+    background: linear-gradient(135deg, #00D084 0%, #00A66E 100%);
+    box-shadow: 0 4px 15px rgba(0, 208, 132, 0.3);
+}
+
+body.theme-classic .info-item .value {
+    color: #00D084;
+}
+
+body.theme-classic .final-score {
+    color: #00D084;
+}
+
+body.theme-classic .stat-value {
+    color: #00D084;
+}
+
+body.theme-classic .help-section h3 {
+    color: #00D084;
+}
+
+body.theme-classic .difficulty-btn.active {
+    background: linear-gradient(135deg, #00D084 0%, #00A66E 100%);
+}
+
+body.theme-classic .theme-btn.active {
+    border-color: #00D084;
+}
+
+body.theme-classic input:checked + .slider {
+    background-color: #00D084;
+}
+
+body.theme-classic .countdown {
+    color: #00D084;
+    text-shadow: 0 0 30px rgba(0, 208, 132, 0.8);
+}
+
+/* 暗黑主题 */
+body.theme-dark {
+    --primary-color: #BB86FC;
+    --primary-dark: #9965F4;
+    --bg-color: #121212;
+    --bg-secondary: #1E1E1E;
+    --snake-color: #BB86FC;
+    --snake-head: #D0A0FF;
+    --food-color: #03DAC6;
+    --text-color: #E0E0E0;
+    --text-secondary: rgba(224, 224, 224, 0.7);
+    background: #121212;
+}
+
+body.theme-dark #welcomeScreen {
+    background: linear-gradient(135deg, #121212 0%, #1E1E1E 100%);
+}
+
+body.theme-dark .game-logo {
+    text-shadow: 0 0 20px rgba(187, 134, 252, 0.5);
+}
+
+body.theme-dark .primary-btn,
+body.theme-dark .start-btn {
+    background: linear-gradient(135deg, #BB86FC 0%, #9965F4 100%);
+    box-shadow: 0 4px 15px rgba(187, 134, 252, 0.3);
+}
+
+body.theme-dark .info-item .value {
+    color: #BB86FC;
+}
+
+body.theme-dark .final-score {
+    color: #BB86FC;
+}
+
+body.theme-dark .stat-value {
+    color: #BB86FC;
+}
+
+body.theme-dark .help-section h3 {
+    color: #BB86FC;
+}
+
+body.theme-dark .difficulty-btn.active {
+    background: linear-gradient(135deg, #BB86FC 0%, #9965F4 100%);
+}
+
+body.theme-dark .theme-btn.active {
+    border-color: #BB86FC;
+}
+
+body.theme-dark input:checked + .slider {
+    background-color: #BB86FC;
+}
+
+body.theme-dark .countdown {
+    color: #BB86FC;
+    text-shadow: 0 0 30px rgba(187, 134, 252, 0.8);
+}
+
+body.theme-dark .high-score-display .score {
+    color: #BB86FC;
+}
+
+body.theme-dark .modal-content {
+    background: rgba(18, 18, 18, 0.95);
+    border: 1px solid rgba(187, 134, 252, 0.2);
+}
+
+/* 彩虹主题 */
+body.theme-rainbow {
+    --primary-color: #FF6B6B;
+    --primary-dark: #EE5A5A;
+    --bg-color: #F8F9FA;
+    --bg-secondary: #E9ECEF;
+    --text-color: #333333;
+    --text-secondary: rgba(51, 51, 51, 0.7);
+    background: #F8F9FA;
+    color: #333333;
+}
+
+body.theme-rainbow #welcomeScreen {
+    background: linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 50%, #FFE66D 100%);
+}
+
+body.theme-rainbow .game-logo {
+    text-shadow: 0 0 20px rgba(255, 107, 107, 0.5);
+    background: linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 50%, #FFE66D 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+body.theme-rainbow .primary-btn,
+body.theme-rainbow .start-btn {
+    background: linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 50%, #FFE66D 100%);
+    box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+}
+
+body.theme-rainbow .secondary-btn,
+body.theme-rainbow .control-btn,
+body.theme-rainbow .back-btn {
+    background: rgba(0, 0, 0, 0.1);
+    color: #333333;
+}
+
+body.theme-rainbow .info-item .value {
+    background: linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+body.theme-rainbow .final-score {
+    background: linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+body.theme-rainbow .stat-value {
+    background: linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+body.theme-rainbow .help-section h3 {
+    background: linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+body.theme-rainbow .difficulty-btn.active {
+    background: linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 100%);
+    color: white;
+}
+
+body.theme-rainbow .theme-btn.active {
+    border-color: #FF6B6B;
+}
+
+body.theme-rainbow input:checked + .slider {
+    background: linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 100%);
+}
+
+body.theme-rainbow .countdown {
+    background: linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: none;
+}
+
+body.theme-rainbow .high-score-display .score {
+    background: linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+body.theme-rainbow .modal-content {
+    background: rgba(248, 249, 250, 0.95);
+    border: 1px solid rgba(255, 107, 107, 0.3);
+    color: #333333;
+}
+
+body.theme-rainbow .settings-container,
+body.theme-rainbow .stats-container,
+body.theme-rainbow .help-container {
+    background: rgba(255, 255, 255, 0.8);
+    color: #333333;
+}
+
+body.theme-rainbow .setting-item,
+body.theme-rainbow .stat-card,
+body.theme-rainbow .controls-guide {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+body.theme-rainbow .game-header {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+body.theme-rainbow .history-table {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+body.theme-rainbow .history-table th {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+body.theme-rainbow .history-table td {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+body.theme-rainbow .key {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+body.theme-rainbow .slider {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+body.theme-rainbow .dpad-btn {
+    background: rgba(0, 0, 0, 0.1);
+    color: #333333;
+}
+
+body.theme-rainbow .theme-btn {
+    background: rgba(0, 0, 0, 0.05);
+    color: #333333;
+}
+
+body.theme-rainbow .difficulty-btn {
+    background: rgba(0, 0, 0, 0.1);
+    color: #333333;
+}
+
+/* 彩虹主题的滚动条 */
+body.theme-rainbow ::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+body.theme-rainbow ::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+body.theme-rainbow ::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.3);
+}
